@@ -25,6 +25,7 @@ jobs:
           git reset
           git add index.html
           touch .nojekyll
-          git add .nojekyll
+          printf '{"id":"%s"}' "$GITHUB_SHA" > version.json
+          git add .nojekyll version.json
           git commit -m "Deploy ${GITHUB_SHA::7}"
           git push -f origin pages-tmp:gh-pages
